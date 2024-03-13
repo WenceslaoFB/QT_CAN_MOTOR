@@ -41,15 +41,29 @@ public:
     ~MainWindow();
 
 
+private slots:
+    void on_pushButton_2_pressed();
+
+    void on_pushButton_10_pressed();
+
 private:
     Ui::MainWindow *ui;
 
     QSerialPort *serial;
 
     void OnQSerialPort1Rx();
+    void crearArrayCMD(uint8_t cmd, uint8_t id);
+    void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]);
 
-    uint8_t TX[256], payload[8],RX[256],indiceRX_r=0,indiceRX_t=0;
+    uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0;
     volatile _rx ringRx;
     volatile _tx ringTx;
+
+    #define ID_M_DIREC 10
+    #define ID_M_VEL 20
+
+    #define ENABLE 0x01
+    #define DISABLE 0x02
+    #define INVERTIR 0x03
 };
 #endif // MAINWINDOW_H
