@@ -40,7 +40,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -78,7 +78,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="textEdit_4">
+          <widget class="QTextEdit" name="text_pos">
            <property name="maximumSize">
             <size>
              <width>250</width>
@@ -128,7 +128,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="EN_DIR">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -146,7 +146,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_10">
+          <widget class="QPushButton" name="DIS_DIR">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -205,7 +205,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit">
+          <widget class="QLineEdit" name="LINE_POS">
            <property name="font">
             <font>
              <pointsize>18</pointsize>
@@ -220,7 +220,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="POS_BUT">
            <property name="font">
             <font>
              <pointsize>18</pointsize>
@@ -272,7 +272,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="textEdit_3">
+          <widget class="QTextEdit" name="text_vel">
            <property name="maximumSize">
             <size>
              <width>250</width>
@@ -301,7 +301,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0,0">
+        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0,0,0">
          <item>
           <widget class="QLabel" name="label_5">
            <property name="minimumSize">
@@ -322,7 +322,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="EN_VEL">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -336,6 +336,24 @@
            </property>
            <property name="text">
             <string>Enable</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="DIS_VEL">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>70</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Disable</string>
            </property>
           </widget>
          </item>
@@ -381,7 +399,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QPushButton" name="B_500_RPM">
            <property name="maximumSize">
             <size>
              <width>300</width>
@@ -399,7 +417,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="B_1000_RPM">
            <property name="maximumSize">
             <size>
              <width>300</width>
@@ -417,7 +435,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="QPushButton" name="B_1500_RPM">
            <property name="maximumSize">
             <size>
              <width>300</width>
@@ -435,7 +453,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QPushButton" name="B_2000_RPM">
            <property name="maximumSize">
             <size>
              <width>300</width>
@@ -455,7 +473,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QSlider" name="horizontalSlider">
+            <widget class="QSlider" name="SLID_RPM">
              <property name="minimum">
               <number>500</number>
              </property>
@@ -468,7 +486,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBox">
+            <widget class="QSpinBox" name="spin_rpm">
              <property name="minimum">
               <number>500</number>
              </property>

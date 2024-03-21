@@ -32,6 +32,19 @@ typedef struct {
     uint8_t cks;
 }__attribute__((packed, aligned(1))) _tx;
 
+typedef union{
+    uint8_t u8[4];
+    int8_t  i8[4];
+
+    uint16_t u16[2];
+    int16_t  i16[2];
+
+    uint32_t u32;
+    int32_t  i32;
+
+    float    f;
+}_sWork;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -42,9 +55,28 @@ public:
 
 
 private slots:
-    void on_pushButton_2_pressed();
 
-    void on_pushButton_10_pressed();
+    void inicio();
+
+    void on_EN_DIR_pressed();
+
+    void on_DIS_DIR_pressed();
+
+    void on_EN_VEL_pressed();
+
+    void on_DIS_VEL_pressed();
+
+    void on_B_500_RPM_pressed();
+
+    void on_B_1000_RPM_pressed();
+
+    void on_B_1500_RPM_pressed();
+
+    void on_B_2000_RPM_pressed();
+
+    void on_SLID_RPM_valueChanged(int RPM_slid);
+
+    void on_POS_BUT_pressed();
 
 private:
     Ui::MainWindow *ui;
@@ -52,18 +84,41 @@ private:
     QSerialPort *serial;
 
     void OnQSerialPort1Rx();
-    void crearArrayCMD(uint8_t cmd, uint8_t id);
+    void crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm);
     void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]);
 
     uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0;
+
+    float vel_aux = 0;
+
+    _sWork pos_cmd, pos_ing, pos_aux, velocidad_cmd;
+
     volatile _rx ringRx;
     volatile _tx ringTx;
+
+    #define ENCODER_RESOLUTION 10000L
+    #define CONST_VEL 512L
+    #define CONST_VEL2 1875L
+    #define AUX_RPM_1000 1000L
 
     #define ID_M_DIREC 10
     #define ID_M_VEL 20
 
+    #define VELOCITY_MODE 0xA3
+    #define POSITION_MODE 0xA1
+
     #define ENABLE 0x01
     #define DISABLE 0x02
-    #define INVERTIR 0x03
+    #define INVERTIR_1 0x03
+    #define INVERTIR_2 0x04
+    #define READY_POS 0x05
+
+    #define TARGET_SPEED 0x07
+    #define RPM_500 0xB1
+    #define RPM_1000 0xB2
+    #define RPM_1500 0xB3
+    #define RPM_2000 0xB4
+
+    #define TARGET_POS 0x08
 };
 #endif // MAINWINDOW_H
