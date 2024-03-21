@@ -64,18 +64,18 @@ void MainWindow::OnQSerialPort1Rx(){
 
 void MainWindow::inicio(){
 
-    crearArrayCMD(POSITION_MODE,ID_M_DIREC,0x00);
+    crearArrayCMD(POSITION_MODE,ID_M_DIREC);
     EnviarComando(0x0B, POSITION_MODE, payloadCAN);
 
-    crearArrayCMD(VELOCITY_MODE,ID_M_VEL,0x00);
+    crearArrayCMD(VELOCITY_MODE,ID_M_VEL);
     EnviarComando(0x0B, VELOCITY_MODE, payloadCAN);
 }
 
-void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm){
+void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
 
     switch(cmd){ //la data se guarda en el mensaje poniendo el byte menos sig primero
 
-    case VELOCITY_MODE:
+    case VELOCITY_MODE: //coloca el motor en modo velocidad
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
         payloadCAN[2] = 0x60;
@@ -86,7 +86,7 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm){
         payloadCAN[7] = 0x00;
         payloadCAN[8] = 0x00;
     break;
-    case POSITION_MODE:
+    case POSITION_MODE://coloca el motor en modo posicion
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
         payloadCAN[2] = 0x60;
@@ -97,7 +97,7 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm){
         payloadCAN[7] = 0x00;
         payloadCAN[8] = 0x00;
     break;
-    case ENABLE:
+    case ENABLE://envia la señal que habilita el motor
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2B;
         payloadCAN[2] = 0x40;
@@ -108,7 +108,7 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm){
         payloadCAN[7] = 0x00;
         payloadCAN[8] = 0x00;
     break;
-    case DISABLE:
+    case DISABLE://envia la señal que deshabilita el motor
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2B;
         payloadCAN[2] = 0x40;
@@ -119,46 +119,18 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm){
         payloadCAN[7] = 0x00;
         payloadCAN[8] = 0x00;
     break;
-    case TARGET_SPEED://estan en -100 rpm, ejemplo del manual, calcular velocidad
+    case TARGET_SPEED://envia la velocidad a la que se desea que vaya el motor
         payloadCAN[0] = id;
         payloadCAN[1] = 0x23;
         payloadCAN[2] = 0xFF;
         payloadCAN[3] = 0x60;
         payloadCAN[4] = 0x00;
-        switch(rpm){
-            case RPM_500:
-            payloadCAN[5] = 0x7E;
-            payloadCAN[6] = 0xB1;
-            payloadCAN[7] = 0xE4;
-            payloadCAN[8] = 0xFF;
-            break;
-            case RPM_1000:
-            payloadCAN[5] = 0x7E;
-            payloadCAN[6] = 0xB1;
-            payloadCAN[7] = 0xE4;
-            payloadCAN[8] = 0xFF;
-            break;
-            case RPM_1500:
-            payloadCAN[5] = 0x7E;
-            payloadCAN[6] = 0xB1;
-            payloadCAN[7] = 0xE4;
-            payloadCAN[8] = 0xFF;
-            break;
-            case RPM_2000:
-            payloadCAN[5] = 0x7E;
-            payloadCAN[6] = 0xB1;
-            payloadCAN[7] = 0xE4;
-            payloadCAN[8] = 0xFF;
-            break;
-            default://aca iria la velociad del slider
-            payloadCAN[5] = 0x7E;
-            payloadCAN[6] = 0xB1;
-            payloadCAN[7] = 0xE4;
-            payloadCAN[8] = 0xFF;
-            break;
-        }
+        payloadCAN[5] = velocidad_cmd.u8[0];
+        payloadCAN[6] = velocidad_cmd.u8[1];
+        payloadCAN[7] = velocidad_cmd.u8[2];
+        payloadCAN[8] = velocidad_cmd.u8[3];
         break;
-    case TARGET_POS://50000 inc, ejemplo del manual
+    case TARGET_POS://envia la posicion a la que se desea que se desplace el motor
         payloadCAN[0] = id;
         payloadCAN[1] = 0x23;
         payloadCAN[2] = 0x7A;
@@ -169,7 +141,7 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm){
         payloadCAN[7] = pos_cmd.u8[2];
         payloadCAN[8] = pos_cmd.u8[3];
         break;
-    case INVERTIR_1:
+    case INVERTIR_1://invierte el giro del motor
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
         payloadCAN[2] = 0x60;
@@ -180,7 +152,7 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm){
         payloadCAN[7] = 0x00;
         payloadCAN[8] = 0x00;
         break;
-    case INVERTIR_2:
+    case INVERTIR_2://vuelve a invertir el giro
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
         payloadCAN[2] = 0x60;
@@ -245,34 +217,34 @@ void MainWindow::EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]
 
 void MainWindow::on_EN_DIR_pressed()
 {
-    crearArrayCMD(ENABLE,ID_M_DIREC, 0x00);
+    crearArrayCMD(ENABLE,ID_M_DIREC);
     EnviarComando(0x0B, ENABLE, payloadCAN);
 }
 
 
 void MainWindow::on_DIS_DIR_pressed()
 {
-    crearArrayCMD(DISABLE,ID_M_DIREC, 0x00);
+    crearArrayCMD(DISABLE,ID_M_DIREC);
     EnviarComando(0x0B, DISABLE, payloadCAN);
 }
 
 
 void MainWindow::on_EN_VEL_pressed()
 {
-    crearArrayCMD(ENABLE,ID_M_VEL, 0x00);
+    crearArrayCMD(ENABLE,ID_M_VEL);
     EnviarComando(0x0B, ENABLE, payloadCAN);
 }
 
 
 void MainWindow::on_DIS_VEL_pressed()
 {
-    crearArrayCMD(DISABLE,ID_M_VEL, 0x00);
+    crearArrayCMD(DISABLE,ID_M_VEL);
     EnviarComando(0x0B, DISABLE, payloadCAN);
 }
 
 
 
-void MainWindow::on_B_500_RPM_pressed()
+void MainWindow::on_B_500_RPM_pressed()// la velocidad se calcula con la ecuacion "DEC=[(rpm* 512 * Encoder_Resolution)/1875]"
 {
     vel_aux = ((500 * 512) * (10000.0/1875));
     velocidad_cmd.u32 = vel_aux;
@@ -281,18 +253,17 @@ void MainWindow::on_B_500_RPM_pressed()
     //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
     //ui->text_vel->setText(strTest2);
 
-    crearArrayCMD(TARGET_SPEED,ID_M_VEL, RPM_500);
+    crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
 }
 
 
 void MainWindow::on_B_1000_RPM_pressed()
 {
-    //DEC=[(rpm* 5 12 * Encoder_Resolution)/1875]
     vel_aux = ((1000 * 512) * (10000.0/1875));
     velocidad_cmd.u32 = vel_aux;
 
-    crearArrayCMD(TARGET_SPEED,ID_M_VEL, RPM_1000);
+    crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
 }
 
@@ -302,7 +273,7 @@ void MainWindow::on_B_1500_RPM_pressed()
     vel_aux = ((1500 * 512) * (10000.0/1875));
     velocidad_cmd.u32 = vel_aux;
 
-    crearArrayCMD(TARGET_SPEED,ID_M_VEL, RPM_1500);
+    crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
 }
 
@@ -312,7 +283,7 @@ void MainWindow::on_B_2000_RPM_pressed()
     vel_aux = ((2000 * 512) * (10000.0/1875));
     velocidad_cmd.u32 = vel_aux;
 
-    crearArrayCMD(TARGET_SPEED,ID_M_VEL, RPM_2000);
+    crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
 }
 
@@ -323,12 +294,10 @@ void MainWindow::on_SLID_RPM_valueChanged(int RPM_slid)
     //buscar forma de pasar el numero del slider a comando
     vel_aux = ((RPM_slid * 512) * (10000.0/1875));
     velocidad_cmd.u32 = vel_aux;
+    vel_slid = vel_aux;
 
     //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
     //ui->text_vel->setText(strTest2);
-
-    crearArrayCMD(TARGET_SPEED,ID_M_VEL, 0x00);
-    EnviarComando(0x0B, 0x00, payloadCAN);
 }
 
 
@@ -345,7 +314,18 @@ void MainWindow::on_POS_BUT_pressed()
 
     //ui->text_pos->setText(strTest);
 
-    crearArrayCMD(POSITION_MODE,ID_M_DIREC, 0x00);
+    crearArrayCMD(POSITION_MODE,ID_M_DIREC);
+    EnviarComando(0x0B, 0x00, payloadCAN);
+}
+
+
+void MainWindow::on_vel_slid_bot_pressed()
+{
+    velocidad_cmd.u32 = vel_slid;
+
+    //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
+    //ui->text_vel->setText(strTest2);
+    crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
 }
 

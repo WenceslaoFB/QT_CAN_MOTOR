@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>812</width>
-    <height>403</height>
+    <width>853</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,8 +35,8 @@
      <rect>
       <x>16</x>
       <y>9</y>
-      <width>781</width>
-      <height>351</height>
+      <width>831</width>
+      <height>381</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -52,7 +52,7 @@
         <x>0</x>
         <y>0</y>
         <width>770</width>
-        <height>321</height>
+        <height>351</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -245,8 +245,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>770</width>
-        <height>321</height>
+        <width>821</width>
+        <height>351</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -487,11 +487,50 @@
            </item>
            <item>
             <widget class="QSpinBox" name="spin_rpm">
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="minimum">
               <number>500</number>
              </property>
              <property name="maximum">
               <number>3000</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="vel_slid_bot">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Enviar</string>
              </property>
             </widget>
            </item>
@@ -514,7 +553,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>812</width>
+     <width>853</width>
      <height>21</height>
     </rect>
    </property>

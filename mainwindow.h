@@ -78,28 +78,25 @@ private slots:
 
     void on_POS_BUT_pressed();
 
+    void on_vel_slid_bot_pressed();
+
 private:
     Ui::MainWindow *ui;
 
     QSerialPort *serial;
 
     void OnQSerialPort1Rx();
-    void crearArrayCMD(uint8_t cmd, uint8_t id, uint8_t rpm);
+    void crearArrayCMD(uint8_t cmd, uint8_t id);
     void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]);
 
     uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0;
 
-    float vel_aux = 0;
+    float vel_aux = 0, vel_slid = 0;
 
     _sWork pos_cmd, pos_ing, pos_aux, velocidad_cmd;
 
     volatile _rx ringRx;
     volatile _tx ringTx;
-
-    #define ENCODER_RESOLUTION 10000L
-    #define CONST_VEL 512L
-    #define CONST_VEL2 1875L
-    #define AUX_RPM_1000 1000L
 
     #define ID_M_DIREC 10
     #define ID_M_VEL 20
@@ -114,10 +111,6 @@ private:
     #define READY_POS 0x05
 
     #define TARGET_SPEED 0x07
-    #define RPM_500 0xB1
-    #define RPM_1000 0xB2
-    #define RPM_1500 0xB3
-    #define RPM_2000 0xB4
 
     #define TARGET_POS 0x08
 };
