@@ -64,8 +64,8 @@ void MainWindow::OnQSerialPort1Rx(){
 
 void MainWindow::inicio(){
 
-    crearArrayCMD(POSITION_MODE,ID_M_DIREC);
-    EnviarComando(0x0B, POSITION_MODE, payloadCAN);
+    //crearArrayCMD(POSITION_MODE,ID_M_DIREC);
+    //EnviarComando(0x0B, POSITION_MODE, payloadCAN);
 
     crearArrayCMD(VELOCITY_MODE,ID_M_VEL);
     EnviarComando(0x0B, VELOCITY_MODE, payloadCAN);
@@ -125,10 +125,10 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
         payloadCAN[2] = 0xFF;
         payloadCAN[3] = 0x60;
         payloadCAN[4] = 0x00;
-        payloadCAN[5] = velocidad_cmd.u8[0];
-        payloadCAN[6] = velocidad_cmd.u8[1];
-        payloadCAN[7] = velocidad_cmd.u8[2];
-        payloadCAN[8] = velocidad_cmd.u8[3];
+        payloadCAN[5] = velocidad_cmd.u8[3];
+        payloadCAN[6] = velocidad_cmd.u8[2];
+        payloadCAN[7] = velocidad_cmd.u8[1];
+        payloadCAN[8] = velocidad_cmd.u8[0];
         break;
     case TARGET_POS://envia la posicion a la que se desea que se desplace el motor
         payloadCAN[0] = id;
@@ -247,21 +247,21 @@ void MainWindow::on_DIS_VEL_pressed()
 void MainWindow::on_B_500_RPM_pressed()// la velocidad se calcula con la ecuacion "DEC=[(rpm* 512 * Encoder_Resolution)/1875]"
 {
     vel_aux = ((500 * 512) * (10000.0/1875));
-    velocidad_cmd.u32 = vel_aux;
+    velocidad_cmd.u32 = (uint32_t)vel_aux;
 
     //QString strTest2 = QString("%1").arg(velocidad_cmd.f, 0, 'f', 2);
     //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
     //ui->text_vel->setText(strTest2);
 
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
-    EnviarComando(0x0B, 0x00, payloadCAN);
+    EnviarComando(0x0B, TARGET_SPEED, payloadCAN);
 }
 
 
 void MainWindow::on_B_1000_RPM_pressed()
 {
     vel_aux = ((1000 * 512) * (10000.0/1875));
-    velocidad_cmd.u32 = vel_aux;
+    velocidad_cmd.u32 = (uint32_t)vel_aux;
 
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
@@ -271,7 +271,7 @@ void MainWindow::on_B_1000_RPM_pressed()
 void MainWindow::on_B_1500_RPM_pressed()
 {
     vel_aux = ((1500 * 512) * (10000.0/1875));
-    velocidad_cmd.u32 = vel_aux;
+    velocidad_cmd.u32 = (uint32_t)vel_aux;
 
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
@@ -281,7 +281,7 @@ void MainWindow::on_B_1500_RPM_pressed()
 void MainWindow::on_B_2000_RPM_pressed()
 {
     vel_aux = ((2000 * 512) * (10000.0/1875));
-    velocidad_cmd.u32 = vel_aux;
+    velocidad_cmd.u32 = (uint32_t)vel_aux;
 
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, 0x00, payloadCAN);
@@ -293,7 +293,7 @@ void MainWindow::on_SLID_RPM_valueChanged(int RPM_slid)
     ui->spin_rpm->setValue(RPM_slid);
     //buscar forma de pasar el numero del slider a comando
     vel_aux = ((RPM_slid * 512) * (10000.0/1875));
-    velocidad_cmd.u32 = vel_aux;
+    velocidad_cmd.u32 = (uint32_t)vel_aux;
     vel_slid = vel_aux;
 
     //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
@@ -306,9 +306,9 @@ void MainWindow::on_POS_BUT_pressed()
     //tomar valor de lineEdit y pasarlo a comando
     pos_ing.f = (ui->LINE_POS->text()).toFloat();
 
-    pos_aux.f = ((pos_ing.f/5.49316)*1000);
+    pos_aux = ((pos_ing.f/5.49316)*1000);
 
-    pos_cmd.u32 = pos_aux.f;
+    pos_cmd.u32 = (uint32_t)pos_aux;
 
     //QString strTest = QString("%1").arg(pos_cmd.u32, 8, 16, QChar('0')).toUpper();
 
@@ -321,7 +321,7 @@ void MainWindow::on_POS_BUT_pressed()
 
 void MainWindow::on_vel_slid_bot_pressed()
 {
-    velocidad_cmd.u32 = vel_slid;
+    velocidad_cmd.u32 = (uint32_t)vel_slid;
 
     //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
     //ui->text_vel->setText(strTest2);

@@ -91,27 +91,24 @@ private:
 
     uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0;
 
-    float vel_aux = 0, vel_slid = 0;
+    float vel_aux = 0, vel_slid = 0, pos_aux=0;
 
-    _sWork pos_cmd, pos_ing, pos_aux, velocidad_cmd;
+    _sWork pos_cmd, pos_ing, velocidad_cmd;
 
     volatile _rx ringRx;
     volatile _tx ringTx;
-
-    #define ID_M_DIREC 10
-    #define ID_M_VEL 20
-
+    //ID de motores
+    #define ID_M_DIREC 0x01
+    #define ID_M_VEL 0x07
+    //Comandos
     #define VELOCITY_MODE 0xA3
     #define POSITION_MODE 0xA1
-
     #define ENABLE 0x01
     #define DISABLE 0x02
     #define INVERTIR_1 0x03
     #define INVERTIR_2 0x04
     #define READY_POS 0x05
-
-    #define TARGET_SPEED 0x07
-
-    #define TARGET_POS 0x08
+    #define TARGET_SPEED 0x06
+    #define TARGET_POS 0x07
 };
 #endif // MAINWINDOW_H
