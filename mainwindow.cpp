@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     serial = new QSerialPort(this);
     //serial->setPortName("COM4"); // Ajusta el nombre del puerto a tu puerto correcto.
-        serial->setPortName("COM11");
+        serial->setPortName("COM12");
         serial->setBaudRate(QSerialPort::Baud9600);
         serial->open(QSerialPort::ReadWrite);
         serial->setDataTerminalReady(true);
@@ -125,10 +125,10 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
         payloadCAN[2] = 0xFF;
         payloadCAN[3] = 0x60;
         payloadCAN[4] = 0x00;
-        payloadCAN[5] = velocidad_cmd.u8[3];
-        payloadCAN[6] = velocidad_cmd.u8[2];
-        payloadCAN[7] = velocidad_cmd.u8[1];
-        payloadCAN[8] = velocidad_cmd.u8[0];
+        payloadCAN[5] = velocidad_cmd.u8[0];
+        payloadCAN[6] = velocidad_cmd.u8[1];
+        payloadCAN[7] = velocidad_cmd.u8[2];
+        payloadCAN[8] = velocidad_cmd.u8[3];
         break;
     case TARGET_POS://envia la posicion a la que se desea que se desplace el motor
         payloadCAN[0] = id;
@@ -197,7 +197,7 @@ void MainWindow::EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]
     TX[13] = payloadCAN[5];
     TX[14] = payloadCAN[6];
     TX[15] = payloadCAN[7];
-    TX[15] = payloadCAN[8];
+    TX[16] = payloadCAN[8];
 
 
     // Calcular el checksum
@@ -249,7 +249,7 @@ void MainWindow::on_B_500_RPM_pressed()// la velocidad se calcula con la ecuacio
     vel_aux = ((500 * 512) * (10000.0/1875));
     velocidad_cmd.u32 = (uint32_t)vel_aux;
 
-    //QString strTest2 = QString("%1").arg(velocidad_cmd.f, 0, 'f', 2);
+    //QString strTest2 = QString("%1").arg(vel_aux, 0, 'f', 2);
     //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
     //ui->text_vel->setText(strTest2);
 
@@ -264,7 +264,7 @@ void MainWindow::on_B_1000_RPM_pressed()
     velocidad_cmd.u32 = (uint32_t)vel_aux;
 
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
-    EnviarComando(0x0B, 0x00, payloadCAN);
+    EnviarComando(0x0B, TARGET_SPEED, payloadCAN);
 }
 
 
@@ -274,7 +274,7 @@ void MainWindow::on_B_1500_RPM_pressed()
     velocidad_cmd.u32 = (uint32_t)vel_aux;
 
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
-    EnviarComando(0x0B, 0x00, payloadCAN);
+    EnviarComando(0x0B, TARGET_SPEED, payloadCAN);
 }
 
 
@@ -284,7 +284,7 @@ void MainWindow::on_B_2000_RPM_pressed()
     velocidad_cmd.u32 = (uint32_t)vel_aux;
 
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
-    EnviarComando(0x0B, 0x00, payloadCAN);
+    EnviarComando(0x0B, TARGET_SPEED, payloadCAN);
 }
 
 
@@ -326,6 +326,6 @@ void MainWindow::on_vel_slid_bot_pressed()
     //QString strTest2 = QString("%1").arg(velocidad_cmd.u32, 8, 16, QChar('0')).toUpper();
     //ui->text_vel->setText(strTest2);
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
-    EnviarComando(0x0B, 0x00, payloadCAN);
+    EnviarComando(0x0B, TARGET_SPEED, payloadCAN);
 }
 
