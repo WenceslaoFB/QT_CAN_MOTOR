@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
         connect(serial, &QSerialPort::readyRead, this, &MainWindow::OnQSerialPort1Rx);*/
     conectarMicro();
 
-    inicio();
+   // inicio();
 }
 
 MainWindow::~MainWindow()
@@ -51,7 +51,7 @@ MainWindow::~MainWindow()
 void MainWindow::conectarMicro(){
     // Enumerar los puertos disponibles y buscar tu dispositivo específico
     foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
-        if ((info.description().contains("USB Serial Device")) && (info.serialNumber() == "")) {
+        if (((info.description().contains("USB Serial Device")) || (info.description().contains("Dispositivo serie USB"))) && (info.serialNumber() == "")) {
             serial->setPort(info);
             serial->setBaudRate(QSerialPort::Baud115200); // Configura según tu dispositivo
             // Configura otros parámetros si es necesario
@@ -224,7 +224,7 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
     }
 
 }
-void MainWindow::EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]){
+void MainWindow::EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadSEND[]){
 
     TX[0] = 'U';
     TX[1] = 'N';
@@ -234,15 +234,15 @@ void MainWindow::EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]
     TX[5] = 0x00;
     TX[6] = ':';
     TX[7] = cmd;
-    TX[8] = payloadCAN[0];
-    TX[9] = payloadCAN[1];
-    TX[10] = payloadCAN[2];
-    TX[11] = payloadCAN[3];
-    TX[12] = payloadCAN[4];
-    TX[13] = payloadCAN[5];
-    TX[14] = payloadCAN[6];
-    TX[15] = payloadCAN[7];
-    TX[16] = payloadCAN[8];
+    TX[8] = payloadSEND[0];
+    TX[9] = payloadSEND[1];
+    TX[10] = payloadSEND[2];
+    TX[11] = payloadSEND[3];
+    TX[12] = payloadSEND[4];
+    TX[13] = payloadSEND[5];
+    TX[14] = payloadSEND[6];
+    TX[15] = payloadSEND[7];
+    TX[16] = payloadSEND[8];
 
 
     // Calcular el checksum
@@ -253,6 +253,9 @@ void MainWindow::EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]
     cks ^= TX[i];
     }
     TX[TX[4]+6] = cks;
+
+
+
 
     if(serial->isOpen()){
     serial->write((char*)TX, 7 + TX[4]);
@@ -381,43 +384,53 @@ void MainWindow::on_but_CMD_pressed()
 
     QString SubIndex_Str = ui->line_subIndex->text();
 
+    QString Data_Str = ui->line_Data->text();
+
+    QString Send_Str;
+
     //ui->line->setText(Index_Str + SubIndex_Str);
 
     switch(ui->box_ID->currentIndex()){
     case 0:
-        ui->line->setText("01 " + Index_Str + SubIndex_Str);
+        //ui->line->setText("01 " + Index_Str + SubIndex_Str);
+        Send_Str = ("01 "+Index_Str+SubIndex_Str+Data_Str);
+        //ui->line->setText(Send_Str);
     break;
     case 1:
-        ui->line->setText("07 " + Index_Str + SubIndex_Str);
+        //ui->line->setText("07 " + Index_Str + SubIndex_Str);
+        Send_Str = ("07 "+Index_Str+SubIndex_Str+Data_Str);
+        //ui->line->setText(Send_Str);
     break;
     }
 
-    //bool ok;
+    // Divide la cadena usando el espacio como delimitador
+    QStringList hexStrings = Send_Str.split(" ");
+    // Asegúrate de que el array tenga el tamaño adecuado
+    // Asumiendo que sabes el tamaño de antemano. Ajusta según sea necesario.
 
-    //int hex = Index_Str.toInt(&ok, 16);
+    qDebug() << "Tamaño:" << (hexStrings.size());
+    // Convertir cada componente y asignarlo al array
+    for(int i = 0; i < hexStrings.size(); ++i) {
+    bool ok;
+    uint8_t convertedValue = (uint8_t)(hexStrings.at(i).toUInt(&ok, 16));
 
+    // Imprimir el valor convertido para verificar
+    //qDebug() << "Original:" << hexStrings.at(i) << "Convertido:" << payloadCANs[i];
 
-/*
-    if(Index_Str.length() % 2 != 0){
-        //return 1;
+    if(ok) {
+            payloadCANs[i] = convertedValue;
+            //qDebug().nospace() << "Original: "" << hexStrings.at(i) << "" Convertido: 0x" << hex << payloadCANs[i];
+            //qDebug().resetFormat();  // Resetear el formato para futuras impresiones
+    } else {
+            qDebug() << "Error al convertir:" << hexStrings.at(i);
+    }
     }
 
-    QByteArray hexNs;
-
-    for(int i = 0; i < Index_Str.length(); i+=2){
-        QString hex = Index_Str.mid(i,2);
-
-        bool ok;
-        unsigned int hexN = hex.toUint(&ok, 16);
-
-        if(!ok){
-            //return 1;
-        }
-
-        hexNs.append(static_cast<char>(hexN));
-    }
-    //QString strTest2 = QString("%1").arg(hexNs, 8, 16, QChar('0')).toUpper();
-    ui->line->setText(strTest2);*/
-
+    QString strTest2;
+    for(int b = 0; b < 9;b++)
+        strTest2 = strTest2 + QString("%1").arg(payloadCANs[b], 2, 16, QChar('0')).toUpper();
+    ui->line2->setText(strTest2);
+    EnviarComando(0x0B, 0xD7, payloadCANs);
 }
+
 

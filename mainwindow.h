@@ -91,10 +91,10 @@ private:
     void conectarMicro();
     void verificarYConectarUSB();
     void crearArrayCMD(uint8_t cmd, uint8_t id);
-    void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]);
+    void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadSEND[]);
 
     uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0;
-
+    uint8_t payloadCANs[9];
     float vel_aux = 0, vel_slid = 0, pos_aux=0;
 
     _sWork pos_cmd, pos_ing, velocidad_cmd;
@@ -114,5 +114,8 @@ private:
     #define READY_POS 0x05
     #define TARGET_SPEED 0x06
     #define TARGET_POS 0x07
+
+    //Manual
+    #define MANUAL_CMD 0xD7
 };
 #endif // MAINWINDOW_H
