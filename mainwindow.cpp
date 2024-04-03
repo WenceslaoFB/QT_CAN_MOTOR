@@ -6,6 +6,8 @@
 #include <qmessagebox.h>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include <QString>
+#include <QByteArray>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -64,8 +66,8 @@ void MainWindow::OnQSerialPort1Rx(){
 
 void MainWindow::inicio(){
 
-    //crearArrayCMD(POSITION_MODE,ID_M_DIREC);
-    //EnviarComando(0x0B, POSITION_MODE, payloadCAN);
+    crearArrayCMD(POSITION_MODE,ID_M_DIREC);
+    EnviarComando(0x0B, POSITION_MODE, payloadCAN);
 
     crearArrayCMD(VELOCITY_MODE,ID_M_VEL);
     EnviarComando(0x0B, VELOCITY_MODE, payloadCAN);
@@ -327,5 +329,52 @@ void MainWindow::on_vel_slid_bot_pressed()
     //ui->text_vel->setText(strTest2);
     crearArrayCMD(TARGET_SPEED,ID_M_VEL);
     EnviarComando(0x0B, TARGET_SPEED, payloadCAN);
+}
+
+
+void MainWindow::on_but_CMD_pressed()
+{
+    QString Index_Str = ui->line_Index->text();
+
+    QString SubIndex_Str = ui->line_subIndex->text();
+
+    //ui->line->setText(Index_Str + SubIndex_Str);
+
+    switch(ui->box_ID->currentIndex()){
+    case 0:
+        ui->line->setText("01 " + Index_Str + SubIndex_Str);
+    break;
+    case 1:
+        ui->line->setText("07 " + Index_Str + SubIndex_Str);
+    break;
+    }
+
+    //bool ok;
+
+    //int hex = Index_Str.toInt(&ok, 16);
+
+
+/*
+    if(Index_Str.length() % 2 != 0){
+        //return 1;
+    }
+
+    QByteArray hexNs;
+
+    for(int i = 0; i < Index_Str.length(); i+=2){
+        QString hex = Index_Str.mid(i,2);
+
+        bool ok;
+        unsigned int hexN = hex.toUint(&ok, 16);
+
+        if(!ok){
+            //return 1;
+        }
+
+        hexNs.append(static_cast<char>(hexN));
+    }
+    //QString strTest2 = QString("%1").arg(hexNs, 8, 16, QChar('0')).toUpper();
+    ui->line->setText(strTest2);*/
+
 }
 

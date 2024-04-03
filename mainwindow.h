@@ -80,6 +80,8 @@ private slots:
 
     void on_vel_slid_bot_pressed();
 
+    void on_but_CMD_pressed();
+
 private:
     Ui::MainWindow *ui;
 
