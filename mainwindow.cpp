@@ -8,6 +8,9 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <QString>
 #include <QByteArray>
+//#include <QSerialPortInfo>
+#include <QDebug>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,14 +27,18 @@ MainWindow::MainWindow(QWidget *parent)
     ringRx.iR=0;
     ringRx.header=0;
 
+    timerUSB = new QTimer(this);
+    connect(timerUSB, &QTimer::timeout, this, &MainWindow::verificarYConectarUSB);
+    timerUSB->start(1000); // Intervalo de tiempo en milisegundos
+
     serial = new QSerialPort(this);
-    //serial->setPortName("COM4"); // Ajusta el nombre del puerto a tu puerto correcto.
+    /*//serial->setPortName("COM4"); // Ajusta el nombre del puerto a tu puerto correcto.
         serial->setPortName("COM12");
         serial->setBaudRate(QSerialPort::Baud9600);
         serial->open(QSerialPort::ReadWrite);
         serial->setDataTerminalReady(true);
-        connect(serial, &QSerialPort::readyRead, this, &MainWindow::OnQSerialPort1Rx);
-
+        connect(serial, &QSerialPort::readyRead, this, &MainWindow::OnQSerialPort1Rx);*/
+    conectarMicro();
 
     inicio();
 }
@@ -39,6 +46,42 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::conectarMicro(){
+    // Enumerar los puertos disponibles y buscar tu dispositivo específico
+    foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+        if ((info.description().contains("USB Serial Device")) && (info.serialNumber() == "")) {
+            serial->setPort(info);
+            serial->setBaudRate(QSerialPort::Baud115200); // Configura según tu dispositivo
+            // Configura otros parámetros si es necesario
+
+            if (serial->open(QSerialPort::ReadWrite)) {
+                serial->setDataTerminalReady(true);
+                qDebug() << "Conectado con éxito a" << info.portName();
+                break; // Salir del bucle una vez conectado
+            } else {
+                qDebug() << "Error al abrir el puerto:" << serial->errorString();
+            }
+        }
+    }
+}
+
+void MainWindow::verificarYConectarUSB() {
+
+    if (serial->isOpen()) {
+        // El dispositivo ya está conectado, no es necesario hacer nada.
+        qDebug() << "Dispositivo ya conectado.";
+    } else {
+        // Intentar reconectar
+        qDebug() << "Dispositivo desconectado. Intentando reconectar...";
+        conectarMicro();
+    }
+    if (!serial->isOpen() || serial->error() == QSerialPort::ResourceError) {
+        qDebug() << "Problema detectado en la conexión. Intentando reconectar...";
+        serial->close(); // Cierra el puerto si está abierto
+        conectarMicro(); // Intenta reconectar
+    }
 }
 
 void MainWindow::OnQSerialPort1Rx(){

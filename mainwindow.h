@@ -86,8 +86,10 @@ private:
     Ui::MainWindow *ui;
 
     QSerialPort *serial;
-
+    QTimer *timerUSB;
     void OnQSerialPort1Rx();
+    void conectarMicro();
+    void verificarYConectarUSB();
     void crearArrayCMD(uint8_t cmd, uint8_t id);
     void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadCAN[]);
 
