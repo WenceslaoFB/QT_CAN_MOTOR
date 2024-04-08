@@ -189,8 +189,8 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
     case INVERTIR_1://invierte el giro del motor
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
-        payloadCAN[2] = 0x60;
-        payloadCAN[3] = 0x7E;
+        payloadCAN[2] = 0x7E;
+        payloadCAN[3] = 0x60;
         payloadCAN[4] = 0x00;
         payloadCAN[5] = 0x01;
         payloadCAN[6] = 0x00;
@@ -200,8 +200,8 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
     case INVERTIR_2://vuelve a invertir el giro
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
-        payloadCAN[2] = 0x60;
-        payloadCAN[3] = 0x7E;
+        payloadCAN[2] = 0x7E;
+        payloadCAN[3] = 0x60;
         payloadCAN[4] = 0x00;
         payloadCAN[5] = 0x00;
         payloadCAN[6] = 0x00;
