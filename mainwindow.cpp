@@ -362,8 +362,8 @@ void MainWindow::on_POS_BUT_pressed()
 
     //ui->text_pos->setText(strTest);
 
-    crearArrayCMD(POSITION_MODE,ID_M_DIREC);
-    EnviarComando(0x0B, 0x00, payloadCAN);
+    crearArrayCMD(TARGET_POS,ID_M_DIREC);
+    EnviarComando(0x0B, TARGET_POS, payloadCAN);
 }
 
 
@@ -433,4 +433,18 @@ void MainWindow::on_but_CMD_pressed()
     EnviarComando(0x0B, 0xD7, payloadCANs);
 }
 
+
+
+void MainWindow::on_bot_INV_pressed()
+{
+    if(!INV_1){
+        crearArrayCMD(INVERTIR_1,ID_M_VEL);
+        EnviarComando(0x0B, INVERTIR_1, payloadCAN);
+        INV_1 = 1;
+    }else{
+        crearArrayCMD(INVERTIR_2,ID_M_VEL);
+        EnviarComando(0x0B, INVERTIR_2, payloadCAN);
+        INV_1 = 0;
+    }
+}
 

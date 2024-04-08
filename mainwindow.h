@@ -82,6 +82,8 @@ private slots:
 
     void on_but_CMD_pressed();
 
+    void on_bot_INV_pressed();
+
 private:
     Ui::MainWindow *ui;
 
@@ -94,7 +96,7 @@ private:
     void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadSEND[]);
 
     uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0;
-    uint8_t payloadCANs[9];
+    uint8_t payloadCANs[9], INV_1 = 0;
     float vel_aux = 0, vel_slid = 0, pos_aux=0;
 
     _sWork pos_cmd, pos_ing, velocidad_cmd;
