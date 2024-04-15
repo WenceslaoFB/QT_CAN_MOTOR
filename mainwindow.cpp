@@ -119,7 +119,17 @@ void MainWindow::inicio(){
 void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
 
     switch(cmd){ //la data se guarda en el mensaje poniendo el byte menos sig primero
-
+    case 0xAF:
+        payloadCAN[0] = id;
+        payloadCAN[1] = 0x00;
+        payloadCAN[2] = 0x00;
+        payloadCAN[3] = 0x00;
+        payloadCAN[4] = 0x00;
+        payloadCAN[5] = distance_sensor.u8[0];
+        payloadCAN[6] = distance_sensor.u8[1];
+        payloadCAN[7] = distance_sensor.u8[2];
+        payloadCAN[8] = distance_sensor.u8[3];
+    break;
     case VELOCITY_MODE: //coloca el motor en modo velocidad
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
@@ -446,5 +456,16 @@ void MainWindow::on_bot_INV_pressed()
         EnviarComando(0x0B, INVERTIR_2, payloadCAN);
         INV_1 = 0;
     }
+}
+
+
+void MainWindow::on_SLID_distance_valueChanged(int DISTANCE_slid)
+{
+    ui->spin_distance->setValue(DISTANCE_slid);
+    distance_sensor.f=(float)DISTANCE_slid+0.0;
+    crearArrayCMD(0xAF,ID_M_VEL);
+    EnviarComando(0x0B,0xAF,payloadCAN);
+    //buscar forma de pasar el numero del slider a comando
+
 }
 
