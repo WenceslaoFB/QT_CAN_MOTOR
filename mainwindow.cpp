@@ -146,10 +146,10 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
         payloadCAN[7] |= ((uint8_t)ui->sens2->isChecked()<<2);//enviamos el estado del sensor 2 en el bit 2
         payloadCAN[7] |= ((uint8_t)ui->sens3->isChecked()<<3);//enviamos el estado del sensor 3 en el bit 3
 
-        payloadCAN[8] |= (uint8_t)ui->sens7->isChecked();
-        payloadCAN[8] |= ((uint8_t)ui->sens6->isChecked()<<1);
-        payloadCAN[8] |= ((uint8_t)ui->sens5->isChecked()<<2);
-        payloadCAN[8] |= ((uint8_t)ui->sens4->isChecked()<<3);
+        payloadCAN[8] |= (uint8_t)ui->sens4->isChecked();
+        payloadCAN[8] |= ((uint8_t)ui->sens5->isChecked()<<1);
+        payloadCAN[8] |= ((uint8_t)ui->sens6->isChecked()<<2);
+        payloadCAN[8] |= ((uint8_t)ui->sens7->isChecked()<<3);
         break;
     case VELOCITY_MODE: //coloca el motor en modo velocidad
         payloadCAN[0] = id;
