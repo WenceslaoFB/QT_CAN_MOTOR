@@ -86,6 +86,8 @@ private slots:
 
     void on_SLID_distance_valueChanged(int value);
 
+    void on_send_sens_pressed();
+
 private:
     Ui::MainWindow *ui;
 
@@ -97,7 +99,7 @@ private:
     void crearArrayCMD(uint8_t cmd, uint8_t id);
     void EnviarComando(uint8_t length, uint8_t cmd, uint8_t payloadSEND[]);
 
-    uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0;
+    uint8_t TX[256], payloadCAN[256],RX[256],indiceRX_r=0,indiceRX_t=0, sensorDats[9];
     uint8_t payloadCANs[9], INV_1 = 0;
     float vel_aux = 0, vel_slid = 0, pos_aux=0;
 

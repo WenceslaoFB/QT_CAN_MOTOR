@@ -40,7 +40,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -661,9 +661,9 @@
      <widget class="QLineEdit" name="line">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>290</y>
-        <width>351</width>
+        <x>10</x>
+        <y>270</y>
+        <width>221</width>
         <height>31</height>
        </rect>
       </property>
@@ -671,8 +671,8 @@
      <widget class="QLineEdit" name="line2">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>330</y>
+        <x>10</x>
+        <y>310</y>
         <width>221</width>
         <height>24</height>
        </rect>
@@ -681,7 +681,7 @@
      <widget class="QSlider" name="SLID_distance">
       <property name="geometry">
        <rect>
-        <x>510</x>
+        <x>260</x>
         <y>270</y>
         <width>41</width>
         <height>71</height>
@@ -697,7 +697,7 @@
      <widget class="QSpinBox" name="spin_distance">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>300</x>
         <y>310</y>
         <width>39</width>
         <height>30</height>
@@ -728,6 +728,92 @@
       </property>
       <property name="maximum">
        <number>20</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QWidget" name="horizontalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>21</x>
+        <y>30</y>
+        <width>801</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QCheckBox" name="sens0">
+         <property name="text">
+          <string>Sensor 0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="sens1">
+         <property name="text">
+          <string>Sensor 1</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="sens2">
+         <property name="text">
+          <string>Sensor 2</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="sens3">
+         <property name="text">
+          <string>Sensor 3</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="sens4">
+         <property name="text">
+          <string>Sensor 4</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="sens5">
+         <property name="text">
+          <string>Sensor 5</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="sens6">
+         <property name="text">
+          <string>Sensor 6</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="sens7">
+         <property name="text">
+          <string>Sensor 7</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="send_sens">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>120</y>
+        <width>131</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>send</string>
       </property>
      </widget>
     </widget>

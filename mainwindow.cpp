@@ -130,6 +130,27 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
         payloadCAN[7] = distance_sensor.u8[2];
         payloadCAN[8] = distance_sensor.u8[3];
     break;
+    case 0xBF:
+
+    payloadCAN[7] = 0;
+    payloadCAN[8] = 0;
+        payloadCAN[0] = id;
+        payloadCAN[1] = 0x00;
+        payloadCAN[2] = 0x00;
+        payloadCAN[3] = 0x00;
+        payloadCAN[4] = 0x00;
+        payloadCAN[5] = 0x00;
+        payloadCAN[6] = 0x00;
+        payloadCAN[7] |= (uint8_t)ui->sens0->isChecked();//enviamos el estado del sensor 0 en el bit 0
+        payloadCAN[7] |= ((uint8_t)ui->sens1->isChecked()<<1);//enviamos el estado del sensor 1 en el bit 1
+        payloadCAN[7] |= ((uint8_t)ui->sens2->isChecked()<<2);//enviamos el estado del sensor 2 en el bit 2
+        payloadCAN[7] |= ((uint8_t)ui->sens3->isChecked()<<3);//enviamos el estado del sensor 3 en el bit 3
+
+        payloadCAN[8] |= (uint8_t)ui->sens7->isChecked();
+        payloadCAN[8] |= ((uint8_t)ui->sens6->isChecked()<<1);
+        payloadCAN[8] |= ((uint8_t)ui->sens5->isChecked()<<2);
+        payloadCAN[8] |= ((uint8_t)ui->sens4->isChecked()<<3);
+        break;
     case VELOCITY_MODE: //coloca el motor en modo velocidad
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
@@ -467,5 +488,25 @@ void MainWindow::on_SLID_distance_valueChanged(int DISTANCE_slid)
     EnviarComando(0x0B,0xAF,payloadCAN);
     //buscar forma de pasar el numero del slider a comando
 
+}
+
+
+void MainWindow::on_send_sens_pressed()
+{
+//    SensorData[6] = 0;
+//    SensorData[7] = 0;
+
+//    SensorData[6] |= (uint8_t)ui->sens0->isChecked();//enviamos el estado del sensor 0 en el bit 0
+//    SensorData[6] |= ((uint8_t)ui->sens1->isChecked()<<1);//enviamos el estado del sensor 1 en el bit 1
+//    SensorData[6] |= ((uint8_t)ui->sens2->isChecked()<<2);//enviamos el estado del sensor 2 en el bit 2
+//    SensorData[6] |= ((uint8_t)ui->sens3->isChecked()<<3);//enviamos el estado del sensor 3 en el bit 3
+
+//    SensorData[7] |= (uint8_t)ui->sens4->isChecked();
+//    SensorData[7] |= ((uint8_t)ui->sens5->isChecked()<<1);
+//    SensorData[7] |= ((uint8_t)ui->sens6->isChecked()<<2);
+//    SensorData[7] |= ((uint8_t)ui->sens7->isChecked()<<3);
+
+    crearArrayCMD(0xBF,ID_M_DIREC);
+    EnviarComando(0x0B,0xBF,payloadCAN);
 }
 
