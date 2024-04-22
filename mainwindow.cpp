@@ -151,6 +151,17 @@ void MainWindow::crearArrayCMD(uint8_t cmd, uint8_t id){
         payloadCAN[8] |= ((uint8_t)ui->sens6->isChecked()<<2);
         payloadCAN[8] |= ((uint8_t)ui->sens7->isChecked()<<3);
         break;
+    case 0xCF:
+        payloadCAN[0] = id;
+        payloadCAN[1] = KP_SteeringMotor.u8[0];
+        payloadCAN[2] = KP_SteeringMotor.u8[1];
+        payloadCAN[3] = KP_SteeringMotor.u8[2];
+        payloadCAN[4] = KP_SteeringMotor.u8[3];
+        payloadCAN[5] = KD_SteeringMotor.u8[0];
+        payloadCAN[6] = KD_SteeringMotor.u8[1];
+        payloadCAN[7] = KD_SteeringMotor.u8[2];
+        payloadCAN[8] = KD_SteeringMotor.u8[3];
+        break;
     case VELOCITY_MODE: //coloca el motor en modo velocidad
         payloadCAN[0] = id;
         payloadCAN[1] = 0x2F;
@@ -508,5 +519,18 @@ void MainWindow::on_send_sens_pressed()
 
     crearArrayCMD(0xBF,ID_M_DIREC);
     EnviarComando(0x0B,0xBF,payloadCAN);
+}
+
+
+void MainWindow::on_pushButton_PID_Steering_pressed()
+{
+    KP_SteeringMotor.u32 = ui->line_kp_steering->text().toUInt();
+    KD_SteeringMotor.u32 = ui->line_kd_steering->text().toUInt();
+    KI_SteeringMotor.u32 = ui->line_ki_steering->text().toUInt();
+
+    crearArrayCMD(0xCF,ID_M_DIREC);
+    EnviarComando(0x0B,0xCF,payloadCAN);
+
+
 }
 

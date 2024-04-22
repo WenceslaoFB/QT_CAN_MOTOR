@@ -816,6 +816,88 @@
        <string>send</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="line_kp_steering">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>240</y>
+        <width>108</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_KP_steering">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>220</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>KP</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_KD_steering">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>220</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>KD</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="line_kd_steering">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>240</y>
+        <width>108</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_KI_steering">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>220</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>KI</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="line_ki_steering">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>240</y>
+        <width>108</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_PID_Steering">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>280</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PID</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

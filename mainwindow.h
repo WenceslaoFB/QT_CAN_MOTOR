@@ -88,6 +88,8 @@ private slots:
 
     void on_send_sens_pressed();
 
+    void on_pushButton_PID_Steering_pressed();
+
 private:
     Ui::MainWindow *ui;
 
@@ -103,7 +105,7 @@ private:
     uint8_t payloadCANs[9], INV_1 = 0;
     float vel_aux = 0, vel_slid = 0, pos_aux=0;
 
-    _sWork pos_cmd, pos_ing, velocidad_cmd, distance_sensor;
+    _sWork pos_cmd, pos_ing, velocidad_cmd, distance_sensor,KP_SteeringMotor,KD_SteeringMotor,KI_SteeringMotor;
 
     volatile _rx ringRx;
     volatile _tx ringTx;
