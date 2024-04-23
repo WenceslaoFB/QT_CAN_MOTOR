@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>853</width>
-    <height>415</height>
+    <height>438</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,10 +40,15 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QTabWidget {
-    /* Estilo general del TabWidget */
-    background-color: #94a49c;  /* Color de fondo para el área de contenido */
-    border: 5px solid #149c44;  /* Borde alrededor del TabWidget */
+     <string notr="true">QTabWidget::pane {
+    /* El área de contenido del TabWidget */
+    background-color: #94a49c;  /* Fondo del área de contenido */
+    border: 2px solid #149c44;  /* Borde alrededor del área de contenido */
+}
+
+QTabBar {
+    /* El contenedor de las pestañas */
+    background-color: transparent;  /* Deja transparente para mostrar bordes */
 }
 
 QTabBar::tab {
@@ -71,7 +76,7 @@ QTabBar::tab:hover {
 }</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
