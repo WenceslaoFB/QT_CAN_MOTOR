@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>853</width>
-    <height>435</height>
+    <height>415</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,8 +39,39 @@
       <height>381</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QTabWidget {
+    /* Estilo general del TabWidget */
+    background-color: #94a49c;  /* Color de fondo para el área de contenido */
+    border: 5px solid #149c44;  /* Borde alrededor del TabWidget */
+}
+
+QTabBar::tab {
+    /* Estilo para las pestañas */
+    background-color: #94a49c;
+    border: 1px solid #149c44;
+    padding: 5px 10px;  /* Espaciado interno para las pestañas */
+    margin-right: 2px;  /* Espaciado entre las pestañas */
+}
+
+QTabBar::tab:selected {
+    /* Estilo para la pestaña seleccionada */
+    background-color: #149c44;  /* Pestaña seleccionada tiene color más oscuro */
+    color: white;  /* Color del texto de la pestaña seleccionada */
+}
+
+QTabBar::tab:!selected {
+    /* Estilo para pestañas no seleccionadas */
+    color: black;
+}
+
+QTabBar::tab:hover {
+    /* Estilo para pestañas cuando se pasa el ratón por encima */
+    background-color: #94c4a2;  /* Cambio de color al pasar el ratón */
+}</string>
+    </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -49,62 +80,15 @@
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>110</x>
         <y>0</y>
-        <width>821</width>
+        <width>581</width>
         <height>351</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="minimumSize">
-            <size>
-             <width>250</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>300</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Conexión&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTextEdit" name="text_pos">
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>200</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
-           </property>
-           <property name="lineWidth">
-            <number>2</number>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QVBoxLayout" name="verticalLayout"/>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -138,7 +122,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>Enable</string>
@@ -156,7 +159,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>Disable</string>
@@ -191,7 +213,16 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">    background-color: white;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;</string>
            </property>
            <property name="inputMethodHints">
             <set>Qt::ImhDigitsOnly</set>
@@ -206,7 +237,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>Enviar</string>
@@ -225,62 +275,15 @@
      <widget class="QWidget" name="horizontalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>120</x>
         <y>0</y>
-        <width>821</width>
+        <width>601</width>
         <height>351</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="minimumSize">
-            <size>
-             <width>250</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>300</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Conexión&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTextEdit" name="text_vel">
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>200</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Panel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
-           </property>
-           <property name="lineWidth">
-            <number>2</number>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QVBoxLayout" name="verticalLayout_4"/>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0,0,0">
@@ -314,7 +317,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>Enable</string>
@@ -332,7 +354,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>Disable</string>
@@ -350,7 +391,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>Invertir Giro</string>
@@ -391,7 +451,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>500</string>
@@ -409,7 +488,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>1000</string>
@@ -427,7 +525,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>1500</string>
@@ -445,7 +562,26 @@
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
            </property>
            <property name="text">
             <string>2000</string>
@@ -456,6 +592,35 @@
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
             <widget class="QSlider" name="SLID_RPM">
+             <property name="styleSheet">
+              <string notr="true">QSlider::groove:horizontal {
+    /* Estilo del track del slider */
+    border: 1px solid #265c4d;
+    height: 8px;
+    background: #149c44;
+    border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+    /* Estilo del handle (parte que se arrastra) */
+    background: #265c4d;
+    border: 2px solid #149c44;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    margin: -4px 0;  /* Centra el handle en el track */
+}
+
+QSlider::add-page:horizontal {
+    /* Estilo de la parte del track a la derecha del handle */
+    background: #265c4d;
+}
+
+QSlider::sub-page:horizontal {
+    /* Estilo de la parte del track a la izquierda del handle */
+    background: #149c44;
+}</string>
+             </property>
              <property name="minimum">
               <number>500</number>
              </property>
@@ -479,6 +644,18 @@
               <font>
                <bold>true</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QSpinBox {
+    /* Estilo para el QSpinBox cuando es solo lectura */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+    border-radius: 8px;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+}</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -507,9 +684,27 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>12</pointsize>
+               <pointsize>10</pointsize>
                <bold>true</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+	font-weight: bold;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
              </property>
              <property name="text">
               <string>Enviar</string>
@@ -812,8 +1007,34 @@
         <height>61</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;Send&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    /* Estilo inicial del botón */
+    background-color: #149c44;
+    border: 2px solid #265c4d;
+	color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+QPushButton:pressed {
+    /* Estilo del botón cuando está presionado */
+    background-color:  #265c4d;
+    border: 2px solid #265c4d;
+	color: white;
+}</string>
+      </property>
       <property name="text">
-       <string>send</string>
+       <string>Send</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="line_kp_steering">
